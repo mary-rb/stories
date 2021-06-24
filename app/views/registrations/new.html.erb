@@ -1,0 +1,25 @@
+<div class="contact-main ">
+  <div class="d-flex flex-column justify-content-center align-items-center">
+    <% if flash[:notice].present? %>
+      <h1 class="h3 mb-3 fw-lighter"><%= flash[:notice] %></h1>
+    <% else %>
+      <h1 class="h3 mb-3 fw-lighter">Get the latest updates from Stories</h1>
+      <main class="form-signin col-md-3">
+        <%= form_for @user, url: subscribe_path do |f| %>
+          <div class="form_s">
+            <%= f.label :name %>
+            <%= f.text_field :name, class: "form-control" %><br/>
+          </div>
+          <div class="form_s">
+            <%= f.label :email %>
+            <%= f.text_field :email, required: true, class: "form-control" %>
+            <% if @user.errors.messages[:email].any? %>
+              <span class="error_massage"><%= @user.errors.messages[:email].join(', ') %></span>
+            <% end %>
+          </div>
+          <%= f.submit "Join", class: "btn btn-primary mt-4" %>
+        <% end %>
+      </main>
+    <% end %>
+  </div>
+</div>
